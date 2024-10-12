@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <title>Generador de Números</title>
+    <script>
+        function generarNumeros() {
+            const numerosGenerados = [];
+            while (numerosGenerados.length < 8) {
+                const numero = Math.floor(Math.random() * 100);
+                if (!numerosGenerados.includes(numero)) {
+                    numerosGenerados.push(numero);
+                }
+            }
+            actualizarCajas(numerosGenerados);
+        }
+
+        function actualizarCajas(numeros) {
+            const cajas = document.querySelectorAll('.caja');
+            for (let i = 0; i < cajas.length; i++) {
+                cajas[i].textContent = numeros[i].toString().padStart(2, '0');
+            }
+        }
+
+        function ordenarNumeros(orden) {
+            const cajas = document.querySelectorAll('.caja');
+            const numeros = Array.from(cajas).map(caja => parseInt(caja.textContent, 10));
+            if (orden === 'asc') {
+                numeros.sort((a, b) => a - b);
+            } else {
+                numeros.sort((a, b) => b - a);
+            }
+            actualizarCajas(numeros);
+        }
+    </script>
+</head>
+<body>
+    <h1>Implementación de un sistema para generar números pseudoaleatorios</h1>
+    <div class="flex-container">
+        <h2>Generador de números pseudo-aleatorios</h2>
+        <div class="botones">
+            <button class="btn" onclick="generarNumeros()">Generar</button>
+            <button class="btn" onclick="ordenarNumeros('asc')">ASC</button>
+            <button class="btn" onclick="ordenarNumeros('desc')">DESC</button>
+        </div>
+    </div>
+    <div class="caja-container">
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+    </div>
+</body>
+</html>
