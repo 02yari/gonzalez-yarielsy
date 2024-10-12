@@ -5,35 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" type="text/css" href="styles.css"/>
     <title>Generador de Números</title>
-    <script>
-        let numerosGenerados = []; // Lista para almacenar los números generados
-
-        function generarNumeros() {
-            numerosGenerados = []; // Reiniciar la lista cada vez que se genera
-            while (numerosGenerados.length < 8) {
-                const numero = Math.floor(Math.random() * 99) + 1; // Genera números entre 1 y 99
-                if (!numerosGenerados.includes(numero)) {
-                    numerosGenerados.push(numero);
-                }
-            }
+    <scripttype="module">
+        import { generarNumeros, actualizarCajas, ordenarNumeros } from './generador.js';
+    
+        let numerosGenerados = [];
+    
+        function generar() {
+            numerosGenerados = generarNumeros();
             actualizarCajas(numerosGenerados);
         }
-
-        function actualizarCajas(numeros) {
-            const cajas = document.querySelectorAll('.caja');
-            for (let i = 0; i < cajas.length; i++) {
-                cajas[i].textContent = numeros[i].toString().padStart(2, '0');
-            }
-        }
-
-        function ordenarNumeros(orden) {
-            const numeros = [...numerosGenerados]; // Hacer una copia de la lista de números
-            if (orden === 'asc') {
-                numeros.sort((a, b) => a - b);
-            } else {
-                numeros.sort((a, b) => b - a);
-            }
-            actualizarCajas(numeros);
+    
+        function ordenar(orden) {
+            const numerosOrdenados = ordenarNumeros(numerosGenerados, orden);
+            actualizarCajas(numerosOrdenados);
         }
     </script>
 </head>
